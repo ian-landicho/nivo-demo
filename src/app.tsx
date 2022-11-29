@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ResponsiveBar, BarCommonProps } from "@nivo/bar";
+import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsivePie } from "@nivo/pie";
 
@@ -18,8 +18,6 @@ export default function App() {
 
 function Bar() {
   const [data, setData] = React.useState([]);
-  const [barGroupMode, setBarGroupMode] =
-    React.useState<BarCommonProps<typeof data>["groupMode"]>("stacked");
 
   React.useEffect(() => {
     getData();
@@ -32,29 +30,12 @@ function Bar() {
 
   return (
     <>
-      <div>
-        <input
-          type="radio"
-          name="chart"
-          id="stacked-bar"
-          checked={barGroupMode === "stacked"}
-          onChange={() => setBarGroupMode("stacked")}
-        />
-        <label htmlFor="stacked-bar">Stacked Bar</label>
-
-        <input
-          type="radio"
-          name="chart"
-          id="grouped-bar"
-          checked={barGroupMode === "grouped"}
-          onChange={() => setBarGroupMode("grouped")}
-        />
-        <label htmlFor="grouped-bar">Grouped Bar</label>
-      </div>
       <div style={{ width: 1000, height: 900, marginBottom: 30 }}>
         <ResponsiveBar
           data={data}
-          groupMode={barGroupMode}
+          enableLabel={false}
+          groupMode="grouped"
+          animate={false}
           keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
           indexBy="country"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
